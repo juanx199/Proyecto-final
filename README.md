@@ -6,4 +6,3 @@
 ## Descripción
 - Este proyecto se basa en la creación de un juego de autos, consistiendo en un auto manejable por las flechas del teclado, puede avanzar, retroceder, subir o bajar, el jugador buscará alcanzar la máxima cantidad de puntos posibles, perdera 1 de 3 vidas al colisionar con otro auto
 
-posibles fallas con mi fork.
