@@ -11,7 +11,10 @@ from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import simpledialog
 import customtkinter as CTk
+from carrito import Carrito
 
+pygame.init() 
+ 
 
 ROJO = (255, 0, 0)
 VERDE_CLARO = (144, 238, 144)
@@ -22,7 +25,8 @@ AMARILLO = (255, 255, 0)
 AZUL = (0, 0, 139)
 
 
-#ruta_abs = os.path.abspath("Imagenes\MenuInicio.jpg")
+#ruta_abs = os.path.abspath("Imagenes\MenuInicio.jpg") A ESTO LO DEL OS.PATH.ABSPATH 
+
  
 root = tk.Tk()
 root.title('Highway Rush')
@@ -31,9 +35,8 @@ root.geometry = ('1000x600')
 ###########################################################
 
 
-
-ruta_fondo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/MenuInicio20.jpg'
-ruta_logo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Logo.png'
+# ruta_fondo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/MenuInicio20.jpg' PORFA CORREGIR ESTO
+# ruta_logo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Logo.png' ETO TAMBIÉN
 
 try:
     image = Image.open(ruta_fondo)
@@ -96,4 +99,27 @@ speed = 5
 first = True
 fullscreen = False
 
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        # Maneja otros eventos como el teclado
 
+    # Actualiza el estado del carrito del usuario
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        carrito_usuario.actualizar('izquierda')
+    if keys[pygame.K_RIGHT]:
+        carrito_usuario.actualizar('derecha')
+    if keys[pygame.K_UP]:
+        carrito_usuario.actualizar('arriba')
+    if keys[pygame.K_DOWN]:
+        carrito_usuario.actualizar('abajo')
+
+    # Dibuja el carrito del usuario en la pantalla
+    # Asumiendo que 'pantalla' es la superficie donde dibujas tu juego en Pygame
+    pantalla.fill((0, 0, 0))  # Rellena la pantalla con negro
+    carrito_usuario.dibujar(pantalla)
+    pygame.display.flip()
+    Clock.tick(60)  # Limita el framerate a 60 FPS
