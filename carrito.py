@@ -23,5 +23,4 @@ class Carrito(pygame.sprite.Sprite):
 
     def dibujar(self, superficie):
         superficie.blit(self.image, self.rect)
-        
-    
+        i

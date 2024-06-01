@@ -25,18 +25,18 @@ AMARILLO = (255, 255, 0)
 AZUL = (0, 0, 139)
 
 
-#ruta_abs = os.path.abspath("Imagenes\MenuInicio.jpg") A ESTO LO DEL OS.PATH.ABSPATH 
+ruta_abs = ("Imagenes\Menu_inicio.jpg") 
 
  
 root = tk.Tk()
 root.title('Highway Rush')
-root.geometry = ('1000x600')
+root.geometry = ('40x60')
 
 ###########################################################
 
 
-# ruta_fondo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/MenuInicio20.jpg' PORFA CORREGIR ESTO
-# ruta_logo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Logo.png' ETO TAMBIÉN
+ruta_fondo = 'Imagenes\menu_inicio.jpeg' 
+ 
 
 try:
     image = Image.open(ruta_fondo)
@@ -54,7 +54,7 @@ canvas.create_image(0, 0, image=background_image, anchor="nw")
 canvas.image = background_image
 
 try:
-    image = Image.open(ruta_logo)
+    image = Image.open(ruta_fondo)
     background_image = ImageTk.PhotoImage(image)
 except Exception as e:
     print(f"Error al cargar la imagen: {e}")
@@ -83,12 +83,12 @@ boton_iniciar = tk.Button(root, text="Iniciar juego", command=iniciar_juego, fon
 
 VERDE_CLARO = "#399183"
 boton_jugar = tk.Button(text="JUGAR", command=jugar, font=("8-bit Arcade In", 16), bd=3, fg="black", bg=VERDE_CLARO, width=14, height=2)
-boton_jugar.place(x=700, y=300)
+boton_jugar.place(x=320, y=700)
 
 root.mainloop()
 
 
-##################################################################
+
 Clock = pygame.time.Clock()
 
 
