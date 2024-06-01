@@ -9,7 +9,7 @@ class Carrito(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = contenedor.get_rect().center  # Ajusta según sea necesario
         self.mask = pygame.mask.from_surface(self.image)
-        self.velocidad = 5  # Velocidad del carro, ajusta según sea necesario
+        self.velocidad = 5  # Velocidad del carro, apenas ejecute mirar si es muy rapido o muy lento
 
     def actualizar(self, direccion):
         if direccion == 'izquierda':
