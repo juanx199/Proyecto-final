@@ -40,15 +40,15 @@ while running:
     screen.fill((0, 0, 0))  # Limpiar la pantalla
     screen.blit(background, (0, background_y))
     
-    # Si quieres que la imagen se repita para crear un efecto continuo
+    
     screen.blit(background, (0, background_y - screen_height))
 
     # Actualizar la pantalla
     pygame.display.flip()
 
-    # Controlar la velocidad de fotogramas
+    # velocidad de fotogramas
     clock.tick(60)
 
-# Cerrar Pygame
+
 pygame.quit()
 sys.exit()
