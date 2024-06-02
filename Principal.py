@@ -81,9 +81,10 @@ nombre_label = tk.Label(root, text="Ingrese su nombre:", font=("8-bit Arcade In"
 nombre_entry = tk.Entry(root, font=("8-bit Arcade In", 12))
 boton_iniciar = tk.Button(root, text="Iniciar juego", command=iniciar_juego, font=("8-bit Arcade In", 12), bd=2, fg="white", bg="green", width=14, height=2)
 
+
 VERDE_CLARO = "#399183"
 boton_jugar = tk.Button(text="JUGAR", command=jugar, font=("8-bit Arcade In", 16), bd=3, fg="black", bg=VERDE_CLARO, width=14, height=2)
-boton_jugar.place(x=320, y=700)
+boton_jugar.place(x=520, y=450)
 
 root.mainloop()
 
