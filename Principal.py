@@ -6,12 +6,12 @@ from PIL import Image, ImageTk, ImageFilter
 import tkinter as tk
 import customtkinter as CTk
 from carrito import *
-from movimiento import iniciar_pygame
+
 
 # Ruta de las imágenes
-ruta_juego = 'imagenes\carretera.jpeg'
-ruta_fondo = 'imagenes\menu_inicio.jpeg'
-
+ruta_juego = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Fondo.jpg'
+ruta_fondo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/MenuInicio20.jpg'
+ruta_logo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Logo.png'
 
 
 root = tk.Tk()
@@ -43,7 +43,7 @@ except Exception as e:
 
 # Cargar el logo
 try:
-    image = Image.open(ruta_juego)
+    image = Image.open(ruta_logo)
     logo_image = ImageTk.PhotoImage(image)
 except Exception as e:
     print(f"Error al cargar la imagen: {e}")
@@ -55,10 +55,10 @@ def jugar():
     boton_jugar.place_forget()
     boton_salir.place_forget()
     # Mostrar los campos de entrada y botón en el canvas
-    # nombre_label.place(x=490, y=500)
-    # nombre_entry.place(x=490, y=540)
-    # boton_iniciar.place(x=490, y=580)
-    iniciar_pygame()
+    nombre_label.place(x=490, y=500)
+    nombre_entry.place(x=490, y=540)
+    boton_iniciar.place(x=490, y=580)
+
 
 def iniciar_juego():
     nombre = nombre_entry.get()
@@ -124,3 +124,27 @@ speed = 5
 first = True
 fullscreen = False
 
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        # Maneja otros eventos como el teclado
+
+    # Actualiza el estado del carrito del usuario
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        carrito_usuario.actualizar('izquierda')
+    if keys[pygame.K_RIGHT]:
+        carrito_usuario.actualizar('derecha')
+    if keys[pygame.K_UP]:
+        carrito_usuario.actualizar('arriba')
+    if keys[pygame.K_DOWN]:
+        carrito_usuario.actualizar('abajo')
+
+    # Dibuja el carrito del usuario en la pantalla
+    # Asumiendo que 'pantalla' es la superficie donde dibujas tu juego en Pygame
+    pantalla.fill((0, 0, 0))  # Rellena la pantalla con negro
+    carrito_usuario.dibujar(pantalla)
+    pygame.display.flip()
+    Clock.tick(60) 
