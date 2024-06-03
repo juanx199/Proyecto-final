@@ -1,22 +1,25 @@
 import pygame
-import os
-import json
-from pygame.sprite import _Group
+import random
+from pygame import sprite
 
-class Carros_enemigos(pygame.sprite.Sprite):
-
-    def __init__(self, tipo, carril):
-        super.__init__()
-
-        global speed
-
-        self.size(50, 50)
-        #confirmar el tamaño de la imagen y su posicion
-        self.image = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(directory + "\\Imagenes\\Car1.png").convert_alpha(),self.size),180)
+# Clase para los obstáculos en la pista
+class Obstaculo(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height, speed, image_paths):
+        super().__init__()
+         # Elegir una ruta de imagen aleatoria de la lista de rutas de imagen
+        image_path = random.choice(image_paths)
+        # Cargar la imagen del sprite
+        self.image = pygame.image.load(image_path)
+        self.image = pygame.transform.scale(self.image, (width, height))  # Escalar la imagen al tamaño deseado
         self.rect = self.image.get_rect()
-        self.mask = pygame.mask.from_surface(self.image)
+        self.rect.x = x
+        self.rect.y = y
+        self.speed = speed
 
-        self.tipo = tipo
-        self.carretera = carril
+    def update(self):
+        self.rect.y += self.speed
+        # Eliminar el obstáculo cuando salga de la pantalla
+        if self.rect.y > 920:
+            self.kill()
 
-#estoy terminando el codigo#  
+

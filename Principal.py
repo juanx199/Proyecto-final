@@ -6,7 +6,8 @@ from PIL import Image, ImageTk, ImageFilter
 import tkinter as tk
 import customtkinter as CTk
 from carrito import *
-
+from carros_enemigos import Obstaculo
+import random
 
 # Ruta de las imágenes
 ruta_juego = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Fondo.jpg'
@@ -111,11 +112,26 @@ VERDE_CLARO = "#399183"
 boton_salir = tk.Button(text="SALIR", command=salir, font=("8-bit Arcade In", 16), bd=3, fg="black", bg=VERDE_CLARO, width=14, height=2)
 boton_salir.place(x=490, y=560)
 
-
 root.mainloop()
 
 Clock = pygame.time.Clock()
 
+# + + + Generacion de carros
+def update(self):
+        self.obstacle_counter += 1
+        if self.obstacle_counter == self.obstacle_frequency:
+            obstacle_width = 50
+            obstacle_height = 50
+            obstacle_speed = random.randint(5, 9)
+            obstacle_image_paths = ['imagenes/car1.png', 'imagenes/car2.png', 'imagenes/car3.png', 'imagenes/car4.png', 'imagenes/car5.png', 'imagenes/car6.png', 'imagenes/car7.png', 'imagenes/car8.png']  # Lista de rutas de imagen
+            obstacle_x = random.randint(0, 800 - obstacle_width)
+            obstacle = Obstaculo(obstacle_x, 0, obstacle_width, obstacle_height, obstacle_speed, obstacle_image_paths)
+            self.all_sprites.add(obstacle)
+            self.obstacles.add(obstacle)
+            self.obstacle_counter = 0
+
+        self.all_sprites.update()
+# + + + 
 
 userName = str
 points = 0
