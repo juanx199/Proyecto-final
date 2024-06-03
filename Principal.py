@@ -117,10 +117,10 @@ root.mainloop()
 Clock = pygame.time.Clock()
 
 
-# userName = str
-# points = 0
-# date = str
-# speed = 5
-# first = True
-# fullscreen = False
+userName = str
+points = 0
+date = str
+speed = 5
+first = True
+fullscreen = False
 
