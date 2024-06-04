@@ -42,7 +42,7 @@ all_sprites = pygame.sprite.Group()
 obstacles = pygame.sprite.Group()
 
 # Configuración de generación de obstáculos
-obstacle_frequency = 50
+obstacle_frequency = 10
 obstacle_counter = 0
 
 # Lista de rutas de imagen para los obstáculos
@@ -87,10 +87,10 @@ while running:
     obstacle_counter += 1
     if obstacle_counter == obstacle_frequency:
         obstacle_width = 50
-        obstacle_height = 50
+        obstacle_height = 60
         obstacle_speed = random.randint(5, 9)
-        obstacle_x = random.randint(100, 700 - obstacle_width)
-        obstacle = Obstaculo(obstacle_x, 0, obstacle_width, obstacle_height, obstacle_speed, obstacle_image_paths)
+        obstacle_x = random.randint(90, 700 - obstacle_width)
+        obstacle = Obstaculo(obstacle_x, -50, obstacle_width, obstacle_height, obstacle_speed, obstacle_image_paths)
         all_sprites.add(obstacle)
         obstacles.add(obstacle)
         obstacle_counter = 0
