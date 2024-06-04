@@ -1,6 +1,7 @@
 import pygame
 import sys
-
+import random
+from carros_enemigos import Obstaculo
 # Inicializar Pygame
 pygame.init()
 
@@ -36,6 +37,21 @@ car_speed = 5
 # Reloj para controlar la velocidad de fotogramas
 clock = pygame.time.Clock()
 
+# Grupos de sprites
+all_sprites = pygame.sprite.Group()
+obstacles = pygame.sprite.Group()
+
+# Configuración de generación de obstáculos
+obstacle_frequency = 50
+obstacle_counter = 0
+
+# Lista de rutas de imagen para los obstáculos
+obstacle_image_paths = [
+    'imagenes/car1.png', 'imagenes/car2.png', 'imagenes/car3.png', 
+    'imagenes/car4.png', 'imagenes/car5.png', 'imagenes/car6.png', 
+    'imagenes/car7.png', 'imagenes/car8.png'
+]
+
 # Bucle principal del juego
 running = True
 while running:
@@ -67,6 +83,21 @@ while running:
     car_x = max(0, min(car_x, screen_width - car_width))
     car_y = max(0, min(car_y, screen_height - car_height))
 
+     # Generación de obstáculos
+    obstacle_counter += 1
+    if obstacle_counter == obstacle_frequency:
+        obstacle_width = 50
+        obstacle_height = 50
+        obstacle_speed = random.randint(5, 9)
+        obstacle_x = random.randint(100, 700 - obstacle_width)
+        obstacle = Obstaculo(obstacle_x, 0, obstacle_width, obstacle_height, obstacle_speed, obstacle_image_paths)
+        all_sprites.add(obstacle)
+        obstacles.add(obstacle)
+        obstacle_counter = 0
+
+    # Actualizar la lógica del juego
+    all_sprites.update()
+
     # Dibujar la carretera en la pantalla
     screen.fill((0, 0, 0))  # Limpiar la pantalla
     screen.blit(background, (0, background_y))
@@ -77,6 +108,9 @@ while running:
 
     # Dibujar el carro rotado en la pantalla
     screen.blit(rotated_car, (car_x, car_y))
+
+    # Dibujar los obstáculos
+    all_sprites.draw(screen)
 
     # Actualizar la pantalla
     pygame.display.flip()
