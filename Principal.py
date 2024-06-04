@@ -6,13 +6,11 @@ from PIL import Image, ImageTk, ImageFilter
 import tkinter as tk
 import customtkinter as CTk
 from carrito import *
-from carros_enemigos import Obstaculo
-import random
 
 # Ruta de las imágenes
-ruta_juego = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Fondo.jpg'
-ruta_fondo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/MenuInicio20.jpg'
-ruta_logo = 'C:/Users/lenovo/Dropbox/PP/FINAL/Imagenes/Logo.png'
+ruta_juego = 'imagenes/carretera.jpeg'
+ruta_fondo = 'imagenes/menu_inicio.jpeg'
+ruta_logo = 'imagenes/Logo.jpg'
 
 
 root = tk.Tk()
@@ -116,23 +114,6 @@ root.mainloop()
 
 Clock = pygame.time.Clock()
 
-# + + + Generacion de carros
-def update(self):
-        self.obstacle_counter += 1
-        if self.obstacle_counter == self.obstacle_frequency:
-            obstacle_width = 50
-            obstacle_height = 50
-            obstacle_speed = random.randint(5, 9)
-            obstacle_image_paths = ['imagenes/car1.png', 'imagenes/car2.png', 'imagenes/car3.png', 'imagenes/car4.png', 'imagenes/car5.png', 'imagenes/car6.png', 'imagenes/car7.png', 'imagenes/car8.png']  # Lista de rutas de imagen
-            obstacle_x = random.randint(0, 800 - obstacle_width)
-            obstacle = Obstaculo(obstacle_x, 0, obstacle_width, obstacle_height, obstacle_speed, obstacle_image_paths)
-            self.all_sprites.add(obstacle)
-            self.obstacles.add(obstacle)
-            self.obstacle_counter = 0
-
-        self.all_sprites.update()
-# + + + 
-
 userName = str
 points = 0
 date = str
@@ -147,20 +128,5 @@ while True:
             exit()
         # Maneja otros eventos como el teclado
 
-    # Actualiza el estado del carrito del usuario
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        carrito_usuario.actualizar('izquierda')
-    if keys[pygame.K_RIGHT]:
-        carrito_usuario.actualizar('derecha')
-    if keys[pygame.K_UP]:
-        carrito_usuario.actualizar('arriba')
-    if keys[pygame.K_DOWN]:
-        carrito_usuario.actualizar('abajo')
-
-    # Dibuja el carrito del usuario en la pantalla
-    # Asumiendo que 'pantalla' es la superficie donde dibujas tu juego en Pygame
-    pantalla.fill((0, 0, 0))  # Rellena la pantalla con negro
-    carrito_usuario.dibujar(pantalla)
     pygame.display.flip()
     Clock.tick(60) 
