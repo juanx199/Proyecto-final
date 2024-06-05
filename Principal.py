@@ -1,18 +1,14 @@
-import pygame
 import sys
-from pygame.locals import *
-from datetime import datetime
 from PIL import Image, ImageTk, ImageFilter
 import tkinter as tk
-import customtkinter as CTk
-from carrito import *
+from carrito import iniciar_pygame
 
 # Ruta de las imágenes
 ruta_juego = 'imagenes/carretera.jpeg'
 ruta_fondo = 'imagenes/menu_inicio.jpeg'
 ruta_logo = 'imagenes/Logo.jpg'
 
-
+# Inicializar la ventana de Tkinter
 root = tk.Tk()
 root.title('Highway Rush')
 root.geometry('800x920')
@@ -23,7 +19,7 @@ try:
     background_image = ImageTk.PhotoImage(image)
 except Exception as e:
     print(f"Error al cargar la imagen: {e}")
-    exit(1)
+    sys.exit(1)
 
 # Crear un canvas para poner la imagen de fondo
 canvas = tk.Canvas(root, width=image.width, height=image.height)
@@ -38,7 +34,7 @@ try:
     distorted_image_tk = ImageTk.PhotoImage(distorted_image)
 except Exception as e:
     print(f"Error al cargar la imagen: {e}")
-    exit(1)
+    sys.exit(1)
 
 # Cargar el logo
 try:
@@ -46,7 +42,7 @@ try:
     logo_image = ImageTk.PhotoImage(image)
 except Exception as e:
     print(f"Error al cargar la imagen: {e}")
-    exit(1)
+    sys.exit(1)
 
 root.call('wm', 'iconphoto', root._w, logo_image)
 
@@ -57,7 +53,6 @@ def jugar():
     nombre_label.place(x=490, y=500)
     nombre_entry.place(x=490, y=540)
     boton_iniciar.place(x=490, y=580)
-
 
 def iniciar_juego():
     nombre = nombre_entry.get()
@@ -91,6 +86,7 @@ def iniciar_juego():
         else:
             canvas.delete("contador")
             texto_start = canvas.create_text(400, 460, text="START!", fill="black", font=("8-bit Arcade In", 110))
+            root.after(1000, iniciar_pygame)
 
     root.after(5000, lambda: cuenta_regresiva(5))
 
@@ -111,22 +107,3 @@ boton_salir = tk.Button(text="SALIR", command=salir, font=("8-bit Arcade In", 16
 boton_salir.place(x=490, y=560)
 
 root.mainloop()
-
-Clock = pygame.time.Clock()
-
-userName = str
-points = 0
-date = str
-speed = 5
-first = True
-fullscreen = False
-
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        # Maneja otros eventos como el teclado
-
-    pygame.display.flip()
-    Clock.tick(60) 
