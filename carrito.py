@@ -183,4 +183,4 @@ def iniciar_pygame():
     pygame.quit()
     sys.exit()
 
-iniciar_pygame()
+#iniciar_pygame()
