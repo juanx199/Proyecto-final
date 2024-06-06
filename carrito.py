@@ -7,13 +7,36 @@ def iniciar_pygame():
     # Inicializar Pygame
     pygame.init()
 
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
+    Vidas = 1
+    Puntaje = 0
+    
     # Dimensiones de la ventana
     screen_width = 800
     screen_height = 600
 
     # Crear la ventana del juego
     screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Movimiento de Carro")
+    pygame.display.set_caption("Highway Rush")
+    
+    #+++ textico
+    # Establecer la fuente y el tamaño del texto
+    font = pygame.font.Font(None, 37)
+    font2 = pygame.font.Font(None, 100)
+
+    # Crear textos
+    #texto_vidas = font.render("Vidas: " + str(Vidas), True, BLACK) #oculto
+    texto_puntaje = font.render("Puntaje: " + str(Puntaje), True, BLACK)
+    texto_derrota1 = font2.render("Has Perdido", True, BLACK)
+    texto_derrota2 = font2.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
+
+    # Obtener rectangulos de textos
+    #text_vidas_rect = texto_vidas.get_rect(topleft=(10, 25)) #oculto
+    text_Puntaje_rect = texto_puntaje.get_rect(topleft=(10, 25))
+    text_derrota1_rect = texto_derrota1.get_rect(topleft=(170, 200))
+    text_derrota2_rect = texto_derrota2.get_rect(topleft=(160, 400))
+    #+++ textico
 
     # Cargar la imagen de la carretera
     background = pygame.image.load('imagenes/carretera.jpeg')
@@ -44,7 +67,7 @@ def iniciar_pygame():
     obstacles = pygame.sprite.Group()
 
     # Configuración de generación de obstáculos
-    obstacle_frequency = 10
+    obstacle_frequency = 20
     obstacle_counter = 0
 
     # Lista de rutas de imagen para los obstáculos
@@ -53,6 +76,9 @@ def iniciar_pygame():
         'imagenes/car4.png', 'imagenes/car5.png', 'imagenes/car6.png', 
         'imagenes/car7.png', 'imagenes/car8.png'
     ]
+
+    # Crear un rectángulo para el carro del jugador (necesario para detectar colisiones)
+    car_rect = pygame.Rect(car_x, car_y, car_width, car_height)
 
     # Bucle principal del juego
     running = True
@@ -85,6 +111,9 @@ def iniciar_pygame():
         car_x = max(0, min(car_x, screen_width - car_width))
         car_y = max(0, min(car_y, screen_height - car_height))
 
+        # Actualizar el rectángulo del carro del jugador
+        car_rect.topleft = (car_x, car_y)
+
         # Generación de obstáculos
         obstacle_counter += 1
         if obstacle_counter == obstacle_frequency:
@@ -100,6 +129,29 @@ def iniciar_pygame():
         # Actualizar la lógica del juego
         all_sprites.update()
 
+        # Crear un sprite temporal con el rectángulo del carro del jugador
+        temp_sprite = pygame.sprite.Sprite()
+        temp_sprite.rect = car_rect
+
+        for obs in obstacles:
+            if obs.rect.y > car_y + car_height:  # Si el obstáculo está más abajo que el carro
+                Puntaje += 1
+                texto_puntaje = font.render("Puntaje: " + str(Puntaje), True, BLACK)
+
+        # Comprobar colisiones   
+        if pygame.sprite.spritecollideany(temp_sprite, obstacles):
+            Vidas -= 1
+            # Renderizar el texto actualizado de la energía
+            texto_vidas = font.render("Vidas: " + str(Vidas), True, BLACK)
+            if Vidas <= 0:
+                texto_derrota1 = font2.render("Has Perdido", True, BLACK)
+                texto_derrota2 = font2.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
+                screen.blit(texto_derrota1, text_derrota1_rect)
+                screen.blit(texto_derrota2, text_derrota2_rect)
+                pygame.display.flip()
+                pygame.time.delay(5000)
+                running = False  # Termina el juego si la energía llega a 0
+
         # Dibujar la carretera en la pantalla
         screen.fill((0, 0, 0))  # Limpiar la pantalla
         screen.blit(background, (0, background_y))
@@ -113,10 +165,13 @@ def iniciar_pygame():
 
         # Dibujar los obstáculos
         all_sprites.draw(screen)
-
+        
+        # Dibujar el texto en la pantalla
+        #screen.blit(texto_vidas, text_vidas_rect) #oculto
+        screen.blit(texto_puntaje, text_Puntaje_rect)
         # Actualizar la pantalla
         pygame.display.flip()
-
+        
         # velocidad de fotogramas
         clock.tick(60)
 
