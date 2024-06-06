@@ -14,7 +14,7 @@ def iniciar_pygame():
     
     # Dimensiones de la ventana
     screen_width = 800
-    screen_height = 600
+    screen_height = 920
 
     # Crear la ventana del juego
     screen = pygame.display.set_mode((screen_width, screen_height))
@@ -28,7 +28,7 @@ def iniciar_pygame():
     # Crear textos
     texto_vidas = font.render("Vidas: " + str(Vidas), True, BLACK) #oculto
     texto_puntaje = font.render("Puntaje: " + str(Puntaje), True, BLACK)
-    texto_derrota1 = font2.render("Has Perdido", True, BLACK)
+    texto_derrota1 = font2.render("GAME OVER", True, BLACK)
     texto_derrota2 = font2.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
 
     # Obtener rectangulos de textos
@@ -40,7 +40,14 @@ def iniciar_pygame():
 
     #+++ Sonidos
     pygame.mixer.music.load('sonidos/musica.mp3')
-    pygame.mixer.music.play(1)
+    pygame.mixer.music.play(-1)#en bucle
+    motor_sound = pygame.mixer.Sound('sonidos/motor.mp3')
+
+    # Cargar el sonido del motor (puede ser .wav, .mp3, .ogg)
+    motor_sound = pygame.mixer.Sound('sonidos/motor.mp3')
+    motor_channel = pygame.mixer.Channel(1)  # Usar un canal específico para el motor
+    motor_channel.play(motor_sound, loops=-1) #en bucle
+
     #+++ Sonidos
 
     # Cargar la imagen de la carretera
@@ -149,8 +156,11 @@ def iniciar_pygame():
             # Renderizar el texto actualizado de la energía
             texto_vidas = font.render("Vidas: " + str(Vidas), True, BLACK)
             if Vidas <= 0:
-                texto_derrota1 = font2.render("Has Perdido", True, BLACK)
+                texto_derrota1 = font2.render("GAME OVER", True, BLACK)
                 texto_derrota2 = font2.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
+                pygame.mixer.music.load('sonidos/game_over.mp3') #Sonido de derrota
+                pygame.mixer.music.play(1)
+                motor_channel.stop()  # Detener el sonido del motor
                 screen.blit(texto_derrota1, text_derrota1_rect)
                 screen.blit(texto_derrota2, text_derrota2_rect)
                 pygame.display.flip()
