@@ -1,24 +1,20 @@
 import pygame
 import sys
 
-# Inicializar Pygame
 pygame.init()
-
-# Dimensiones de la ventana
 screen_width = 800
-screen_height = 600
+screen_height = 920
 
-# Crear la ventana del juego
+
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Movimiento de Imagen")
 
-# Cargar la imagen
 background = pygame.image.load('imagenes/carretera.jpeg')
 
 # Posición inicial de la imagen
 background_y = 0
 
-# Velocidad de movimiento
+
 speed = 10
 
 # Reloj para controlar la velocidad de fotogramas
