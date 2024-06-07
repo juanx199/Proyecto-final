@@ -59,7 +59,6 @@ def jugar():
     boton_jugar.place_forget()
     boton_salir.place_forget()
     boton_iniciar.place_forget()
-    boton_guardar.place_forget()
     # Mostrar los campos de entrada y botón en el canvas
     nombre_label.place(x=490, y=500)
     nombre_entry.place(x=490, y=540)
@@ -72,7 +71,6 @@ def iniciar_juego():
     boton_iniciar.place_forget()
     boton_salir.place_forget()
     boton_iniciar.place_forget()
-    boton_guardar.place_forget()
 
     if nombre:
         # Limpiar el canvas
