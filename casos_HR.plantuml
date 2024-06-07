@@ -2,26 +2,30 @@
 
 skinparam actorStyle awesome
 
-Jugador as player
+actor Jugador as player
 
-Package Juego {
-    usecase "Iniciar juego" as 1
-    usecase "Jugar" as 2
-    usecase "Ingreso de Datos" as 3
-    usecase "Correr" as 4
-    usecase "Verificar vida" as 5
-    usecase "Mostrar Perder" as 6
-    usecase "Fin juego" as 7
-    usecase "Continuar" as 8
+package Juego {
+    usecase "Iniciar juego" as UC1
+    usecase "Jugar" as UC2
+    usecase "Ingreso de Datos" as UC3
+    usecase "Correr" as UC4
+    usecase "Verificar vida" as UC5
+    usecase "Mostrar Perder" as UC6
+    usecase "Fin juego" as UC7
+    usecase "Continuar" as UC8
 }
-player --> 1
-1 <|-- 2
-2 --> 3
-2 --> 4
-2 --> 5
-5 <.. 6
-5 <.. 8
-6 ..> 7
-5 --> 7
+
+player --> UC1
+UC1 --> UC3 : "Jugador ingresa datos"
+UC1 --> UC2 : "Jugador inicia el juego"
+
+UC2 --> UC4 : "Correr"
+UC4 --> UC5 : "Verificar vida"
+
+UC5 --> UC6 : "Vida agotada"
+UC5 --> UC8 : "Vida disponible"
+
+UC6 --> UC7 : "Mostrar perder y finalizar juego"
+UC8 --> UC2 : "Continuar corriendo"
 
 @enduml
