@@ -4,7 +4,6 @@ import random
 from carros_enemigos import Obstaculo
 
 def iniciar_pygame():
-    # Inicializar Pygame
     pygame.init()
 
     WHITE = (255, 255, 255)
@@ -16,17 +15,15 @@ def iniciar_pygame():
     screen_width = 800
     screen_height = 920
 
-    # Crear la ventana del juego
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Highway Rush")
     
-    #+++ textico
-    # Establecer la fuente y el tamaño del texto
+    # Establece la fuente y el tamaño del texto
     pygame.font.init()
     font = pygame.font.SysFont("8-bit Arcade In", 60)
     font2 = pygame.font.SysFont("8-bit Arcade In", 100)
 
-    # Crear textos
+    # Creacion de textos
     texto_vidas = font.render("Vida", True, BLACK)
     texto_vidas2 = font.render(str(Vidas), True, BLACK)
     texto_puntaje = font.render("Puntaje", True, BLACK)
@@ -48,23 +45,20 @@ def iniciar_pygame():
     pygame.mixer.music.play(-1)#en bucle
     motor_sound = pygame.mixer.Sound('sonidos/motor.mp3')
 
-    # Cargar el sonido del motor (puede ser .wav, .mp3, .ogg)
+    # Cargar el sonido del motor
     motor_sound = pygame.mixer.Sound('sonidos/motor.mp3')
     motor_channel = pygame.mixer.Channel(1)  # Usar un canal específico para el motor
     motor_channel.play(motor_sound, loops=-1) #en bucle
     #+++ Sonidos
 
-    # Cargar la imagen de la carretera
     background = pygame.image.load('imagenes/carretera.jpeg')
 
-    # Inicializar la posición vertical de la carretera
     background_y = 0
 
-    # Cargar la imagen del carro
     car = pygame.image.load('imagenes/Car1.png')
-    car_width, car_height = car.get_size()  # Obtener el ancho y alto del carro
+    car_width, car_height = car.get_size()  
 
-    # Posición inicial del carro
+    # Posición ddel carro desde el inicio
     car_x = screen_width // 2 - car_width // 2
     car_y = screen_height - car_height - 20
 
@@ -93,7 +87,7 @@ def iniciar_pygame():
         'imagenes/car7.png', 'imagenes/car8.png'
     ]
 
-    # Crear un rectángulo para el carro del jugador (necesario para detectar colisiones)
+    # Creacion del rectangulo del carro (Deteccion de colisiones)
     car_rect = pygame.Rect(car_x, car_y, car_width, car_height)
 
     # Bucle principal del juego
