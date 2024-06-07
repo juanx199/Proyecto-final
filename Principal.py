@@ -2,20 +2,30 @@ import sys
 from PIL import Image, ImageTk, ImageFilter
 import tkinter as tk
 from tkinter import font
+import pygame
 from carrito import *
 
-# Se cargan las rutas de las imagenes
+# Inicializar Pygame y el mezclador de sonidos
+pygame.init()
+pygame.mixer.init()
+
+# Cargar los sonidos
+sound_button_click = pygame.mixer.Sound('sonidos/boton.mp3')
+sound_countdown = pygame.mixer.Sound('sonidos/contador.mp3')
+sound_start_game = pygame.mixer.Sound('sonidos/fondo.mp3')
+
+# Ruta de las imágenes
 ruta_juego = 'imagenes/carretera.jpeg'
 ruta_fondo = 'imagenes/menu_inicio.jpeg'
 ruta_logo = 'imagenes/Logo.jpg'
-ruta_fuente = 'ruta/a/8-bit Arcade In.ttf' 
+ruta_fuente = 'ruta/a/8-bit Arcade In.ttf'  # Cambia esto a la ruta de tu fuente
 
-# Creacion de la ventana
+# Inicializar la ventana de Tkinter
 root = tk.Tk()
 root.title('Highway Rush')
 root.geometry('800x920')
 
-# Se carga la imagen de fondo
+# Cargar la imagen de fondo
 try:
     image = Image.open(ruta_fondo)
     background_image = ImageTk.PhotoImage(image)
@@ -23,13 +33,13 @@ except Exception as e:
     print(f"Error al cargar la imagen de fondo: {e}")
     sys.exit(1)
 
-# Creacion del canvas fondo
+# Crear un canvas para poner la imagen de fondo
 canvas = tk.Canvas(root, width=image.width, height=image.height)
 canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image=background_image, anchor="nw")
 canvas.image = background_image
 
-# Cargar la imagen y apalicar filtro
+# Cargar imagen de juego con filtro
 try:
     fondo_jugar = Image.open(ruta_juego)
     distorted_image = fondo_jugar.filter(ImageFilter.BLUR)
@@ -38,7 +48,7 @@ except Exception as e:
     print(f"Error al cargar la imagen del juego: {e}")
     sys.exit(1)
 
-# Se carga el logo
+# Cargar el logo
 try:
     image = Image.open(ruta_logo)
     logo_image = ImageTk.PhotoImage(image)
@@ -48,23 +58,28 @@ except Exception as e:
 
 root.call('wm', 'iconphoto', root._w, logo_image)
 
-# Se carga la fuente
+# Registrar la fuente personalizada
 try:
     custom_font = font.Font(family="8-bit Arcade In", size=16)
 except Exception as e:
     print(f"Error al cargar la fuente personalizada: {e}")
-    custom_font = ("Arial", 16)  # Fuente de respaldo por si no funciona la personalizada
+    custom_font = ("Arial", 16)  # Fuente de respaldo
+
+sound_start_game.play(-1)
 
 def jugar():
+    sound_start_game.stop()
+    sound_button_click.play()
     boton_jugar.place_forget()
     boton_salir.place_forget()
     boton_iniciar.place_forget()
-    # Botones y coordenadas
+    # Mostrar los campos de entrada y botón en el canvas
     nombre_label.place(x=490, y=500)
     nombre_entry.place(x=490, y=540)
     boton_iniciar.place(x=490, y=580)
 
 def iniciar_juego():
+    sound_button_click.play()
     nombre = nombre_entry.get()
     nombre_label.place_forget()
     nombre_entry.place_forget()
@@ -73,11 +88,11 @@ def iniciar_juego():
     boton_iniciar.place_forget()
 
     if nombre:
-        # Borrar el canvas
+        # Limpiar el canvas
         canvas.delete("all")
         canvas.create_image(0, 0, image=distorted_image_tk, anchor="nw")
         mensaje = canvas.create_text(400, 460, text=f"Bienvenido, {nombre}! El juego comienza ahora.", fill="black", font=("8-bit Arcade In", 30))
-
+        sound_countdown.play()
         root.after(5000, lambda: canvas.delete(mensaje))
 
     def cuenta_regresiva(contador):
