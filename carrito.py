@@ -22,18 +22,20 @@ def iniciar_pygame():
     
     #+++ textico
     # Establecer la fuente y el tamaño del texto
-    font = pygame.font.Font(None, 37)
-    font2 = pygame.font.Font(None, 100)
+    pygame.font.init()
+    font_vidas = pygame.font.SysFont(8-bit Arcade In, 40)
+    font_puntaje = pygame.font.SysFont(8-bit Arcade In, 40)
+    font_derrota = pygame.font.SysFont(8-bit Arcade In, 100)
 
-    # Crear textos
-    texto_vidas = font.render("Vidas: " + str(Vidas), True, BLACK) #oculto
-    texto_puntaje = font.render("Puntaje: " + str(Puntaje), True, BLACK)
-    texto_derrota1 = font2.render("GAME OVER", True, BLACK)
-    texto_derrota2 = font2.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
+# Renderizar los textos con las fuentes respectivas
+    texto_vidas = font_vidas.render("Vidas: " + str(Vidas), True, BLACK)
+    texto_puntaje = font_puntaje.render("Puntaje: " + str(Puntaje), True, BLACK)
+    texto_derrota1 = font_derrota.render("GAME OVER", True, BLACK)
+    texto_derrota2 = font_derrota.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
 
     # Obtener rectangulos de textos
     text_vidas_rect = texto_vidas.get_rect(topleft=(10, 25)) #oculto
-    text_Puntaje_rect = texto_puntaje.get_rect(topleft=(10, 50))
+    text_Puntaje_rect = texto_puntaje.get_rect(topleft=(600, 25))
     text_derrota1_rect = texto_derrota1.get_rect(topleft=(170, 200))
     text_derrota2_rect = texto_derrota2.get_rect(topleft=(160, 400))
     #+++ textico
