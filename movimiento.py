@@ -11,9 +11,7 @@ pygame.display.set_caption("Movimiento de Imagen")
 
 background = pygame.image.load('imagenes/carretera.jpeg')
 
-# Posición inicial de la imagen
 background_y = 0
-
 
 speed = 10
 
