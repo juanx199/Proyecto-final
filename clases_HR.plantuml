@@ -1,23 +1,24 @@
 @startuml juego
+
 package Logica {
-  Interfaz Pantalla
+  interface Pantalla
 
   class TkinterGame {
-  - ruta_juego: string
-  - ruta_fondo: string
-  - ruta_logo: string
-  - ruta_fuente: string
-  - custom_font: Font
-  - nombre_label: Label
-  - nombre_entry: Entry
-  - boton_iniciar: Button
-  - boton_jugar: Button
-  - boton_salir: Button
+    - ruta_juego: string
+    - ruta_fondo: string
+    - ruta_logo: string
+    - ruta_fuente: string
+    - custom_font: Font
+    - nombre_label: Label
+    - nombre_entry: Entry
+    - boton_iniciar: Button
+    - boton_jugar: Button
+    - boton_salir: Button
 
-  + jugar()
-  + iniciar_juego()
-  + salir()
-}
+    + jugar()
+    + iniciar_juego()
+    + salir()
+  }
 
   class PygameGame {
     - screen_width: int
@@ -55,9 +56,12 @@ package Logica {
     + draw()
   }
 }
-Principal -- TkinterGame
-TkinterGame -> PygameGame: iniciar_juego()
-PygameGame -> Obstaculo: generar_obstaculo()
-Pantalla --* TkinterGame
+
+class Principal
+
+Principal --> TkinterGame
+TkinterGame --> PygameGame: iniciar_juego()
+PygameGame --> Obstaculo: generar_obstaculo()
+Pantalla <|-- TkinterGame
 
 @enduml
