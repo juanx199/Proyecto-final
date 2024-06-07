@@ -42,6 +42,7 @@ def iniciar_pygame():
 
     #+++ Sonidos
     pygame.mixer.music.load('sonidos/musica.mp3')
+    pygame.mixer.music.set_volume(0.25)
     pygame.mixer.music.play(-1)#en bucle
     motor_sound = pygame.mixer.Sound('sonidos/motor.mp3')
 
