@@ -9,7 +9,7 @@ def iniciar_pygame():
 
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    Vidas = 100
+    Vidas = 50
     Puntaje = 0
     
     # Dimensiones de la ventana
@@ -23,21 +23,24 @@ def iniciar_pygame():
     #+++ textico
     # Establecer la fuente y el tamaño del texto
     pygame.font.init()
-    font_vidas = pygame.font.SysFont(8-bit Arcade In, 40)
-    font_puntaje = pygame.font.SysFont(8-bit Arcade In, 40)
-    font_derrota = pygame.font.SysFont(8-bit Arcade In, 100)
+    font = pygame.font.SysFont("8-bit Arcade In", 60)
+    font2 = pygame.font.SysFont("8-bit Arcade In", 100)
 
-# Renderizar los textos con las fuentes respectivas
-    texto_vidas = font_vidas.render("Vidas: " + str(Vidas), True, BLACK)
-    texto_puntaje = font_puntaje.render("Puntaje: " + str(Puntaje), True, BLACK)
-    texto_derrota1 = font_derrota.render("GAME OVER", True, BLACK)
-    texto_derrota2 = font_derrota.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
+    # Crear textos
+    texto_vidas = font.render("Vida", True, BLACK)
+    texto_vidas2 = font.render(str(Vidas), True, BLACK)
+    texto_puntaje = font.render("Puntaje", True, BLACK)
+    texto_puntaje2 = font.render(str(Puntaje), True, BLACK)
+    texto_derrota1 = font2.render("GAME OVER", True, BLACK)
+    texto_derrota2 = font2.render("Tu Puntaje " + str(Puntaje), True, BLACK)
 
     # Obtener rectangulos de textos
-    text_vidas_rect = texto_vidas.get_rect(topleft=(10, 25)) #oculto
-    text_Puntaje_rect = texto_puntaje.get_rect(topleft=(600, 25))
+    text_vidas_rect = texto_vidas.get_rect(topleft=(10, 25))
+    text_vidas2_rect = texto_vidas.get_rect(topleft=(10, 50))
+    text_Puntaje_rect = texto_puntaje.get_rect(topleft=(550, 25))
+    text_Puntaje2_rect = texto_puntaje2.get_rect(topleft=(550, 50))
     text_derrota1_rect = texto_derrota1.get_rect(topleft=(170, 200))
-    text_derrota2_rect = texto_derrota2.get_rect(topleft=(160, 400))
+    text_derrota2_rect = texto_derrota2.get_rect(topleft=(50, 400))
     #+++ textico
 
     #+++ Sonidos
@@ -49,7 +52,6 @@ def iniciar_pygame():
     motor_sound = pygame.mixer.Sound('sonidos/motor.mp3')
     motor_channel = pygame.mixer.Channel(1)  # Usar un canal específico para el motor
     motor_channel.play(motor_sound, loops=-1) #en bucle
-
     #+++ Sonidos
 
     # Cargar la imagen de la carretera
@@ -122,7 +124,7 @@ def iniciar_pygame():
             angle = 0  # No hay rotación si no se presionan las teclas de dirección
 
         # Limitar la posición del carro para que no salga de la pantalla
-        car_x = max(0, min(car_x, screen_width - car_width))
+        car_x = max(100, min(car_x, screen_width - 150))
         car_y = max(0, min(car_y, screen_height - car_height))
 
         # Actualizar el rectángulo del carro del jugador
@@ -150,16 +152,17 @@ def iniciar_pygame():
         for obs in obstacles:
             if obs.rect.y > car_y + car_height:  # Si el obstáculo está más abajo que el carro
                 Puntaje += 1
-                texto_puntaje = font.render("Puntaje: " + str(Puntaje), True, BLACK)
+                texto_puntaje2 = font.render(str(Puntaje), True, BLACK)
 
         # Comprobar colisiones   
         if pygame.sprite.spritecollideany(temp_sprite, obstacles):
             Vidas -= 1
             # Renderizar el texto actualizado de la energía
-            texto_vidas = font.render("Vidas: " + str(Vidas), True, BLACK)
+            texto_vidas = font.render("Vidas", True, BLACK)
+            texto_vidas2 = font.render(str(Vidas), True, BLACK)
             if Vidas <= 0:
                 texto_derrota1 = font2.render("GAME OVER", True, BLACK)
-                texto_derrota2 = font2.render("Tu Puntaje: " + str(Puntaje), True, BLACK)
+                texto_derrota2 = font2.render("Tu Puntaje " + str(Puntaje), True, BLACK)
                 pygame.mixer.music.load('sonidos/game_over.mp3') #Sonido de derrota
                 pygame.mixer.music.play(1)
                 motor_channel.stop()  # Detener el sonido del motor
@@ -184,8 +187,10 @@ def iniciar_pygame():
         all_sprites.draw(screen)
         
         # Dibujar el texto en la pantalla
-        screen.blit(texto_vidas, text_vidas_rect) #oculto
+        screen.blit(texto_vidas, text_vidas_rect)
+        screen.blit(texto_vidas2, text_vidas2_rect)
         screen.blit(texto_puntaje, text_Puntaje_rect)
+        screen.blit(texto_puntaje2, text_Puntaje2_rect)
         # Actualizar la pantalla
         pygame.display.flip()
         
