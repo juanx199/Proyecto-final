@@ -19,7 +19,7 @@ class Obstaculo(pygame.sprite.Sprite):
     def update(self):
         self.rect.y += self.speed
         # Eliminar el obstáculo cuando salga de la pantalla
-        if self.rect.y > 800:
+        if self.rect.y > 920:
             self.kill()
 
 
