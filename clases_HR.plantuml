@@ -1,0 +1,57 @@
+@startuml juego
+class TkinterGame {
+  - ruta_juego: string
+  - ruta_fondo: string
+  - ruta_logo: string
+  - ruta_fuente: string
+  - custom_font: Font
+  - nombre_label: Label
+  - nombre_entry: Entry
+  - boton_iniciar: Button
+  - boton_jugar: Button
+  - boton_salir: Button
+
+  + jugar()
+  + iniciar_juego()
+  + salir()
+}
+
+class PygameGame {
+  - screen_width: int
+  - screen_height: int
+  - background: Surface
+  - car: Surface
+  - car_x: int
+  - car_y: int
+  - angle: int
+  - speed: int
+  - car_speed: int
+  - clock: Clock
+  - all_sprites: Group
+  - obstacles: Group
+  - obstacle_frequency: int
+  - obstacle_counter: int
+  - obstacle_image_paths: list<string>
+
+  + __init__()
+  + update()
+  + draw()
+  + handle_events()
+}
+
+class Obstaculo {
+  - x: int
+  - y: int
+  - width: int
+  - height: int
+  - speed: int
+  - image_path: string
+
+  + __init__(x: int, y: int, width: int, height: int, speed: int, image_path: string)
+  + update()
+  + draw()
+}
+
+TkinterGame --> PygameGame: iniciar juego
+PygameGame --> Obstaculo: generar obstáculo
+@enduml
