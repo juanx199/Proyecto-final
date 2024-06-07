@@ -2,7 +2,7 @@ import sys
 from PIL import Image, ImageTk, ImageFilter
 import tkinter as tk
 from tkinter import font
-from carrito import iniciar_pygame
+from carrito import *
 
 # Ruta de las imágenes
 ruta_juego = 'imagenes/carretera.jpeg'
@@ -90,7 +90,7 @@ def iniciar_juego():
         else:
             canvas.delete("contador")
             canvas.create_text(400, 460, text="START!", fill="black", font=("8-bit Arcade In", 110))
-            root.after(1000, iniciar_pygame)
+            root.after(1000, lambda: [root.destroy(), iniciar_pygame()])  # Cerrar la ventana de Tkinter y ejecutar iniciar_pygame
 
     root.after(5000, lambda: cuenta_regresiva(5))
     
