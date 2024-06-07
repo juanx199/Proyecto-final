@@ -94,13 +94,6 @@ def iniciar_juego():
 
     root.after(5000, lambda: cuenta_regresiva(5))
     
-def guardar_puntaje():
-    nombre = nombre_entry.get()
-    puntaje = 100  # Aquí debes calcular el puntaje del jugador
-
-    # Guardar el nombre y el puntaje en un archivo o base de datos
-    with open("puntajes.txt", "a") as archivo:
-        archivo.write(f"{nombre}: {puntaje}\n")
 
 def salir():
     root.quit()
@@ -113,10 +106,7 @@ boton_iniciar = tk.Button(root, text="Iniciar juego", command=iniciar_juego, fon
 boton_jugar = tk.Button(root, text="JUGAR", command=jugar, font=custom_font, bd=3, fg="black", bg=VERDE_CLARO, width=14, height=2)
 boton_jugar.place(x=490, y=500)
 
-boton_guardar = tk.Button(root, text="SCORE", command=guardar_puntaje, font=("8-bit Arcade In", 16), bd=3, fg="black", bg=VERDE_CLARO, width=14, height=2)
-boton_guardar.place(x=490, y=560)
-
 boton_salir = tk.Button(root, text="SALIR", command=salir, font=custom_font, bd=3, fg="black", bg=VERDE_CLARO, width=14, height=2)
-boton_salir.place(x=490, y=620)
+boton_salir.place(x=490, y=560)
 
 root.mainloop()
