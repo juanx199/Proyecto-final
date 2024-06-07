@@ -1,0 +1,37 @@
+@startuml
+
+ Diagrama de Secuencia
+
+    participant TkinterGame as TG
+    participant PygameGame as PG
+    participant Obstaculo as O
+
+    note "Iniciar juego"
+    TG->>TG: jugar()
+    TG->>TG: iniciar_juego()
+
+    note "Iniciar Pygame"
+    TG->>PG: __init__()
+    PG->>PG: update()
+    PG->>PG: draw()
+
+    note "Generar obstáculo"
+    PG->>O: __init__(x, y, width, height, speed, image_path)
+    O->>PG: update()
+    O->>PG: draw()
+
+    note "Manejar eventos"
+    PG->>PG: handle_events()
+    PG->>O: update()
+    PG->>O: draw()
+
+    note "Actualizar juego"
+    PG->>PG: update()
+    PG->>O: update()
+    PG->>O: draw()
+
+    note "Finalizar juego"
+    PG->>TG: salir()
+    TG->>TG: salir()
+
+@enduml
