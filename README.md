@@ -1,7 +1,7 @@
 # HIGHWAY RUSH
 ## El asfalto está caliente. La competencia es feroz. ¿Tienes lo necesario para llegar a la cima?
 
-![Inicio Juego](Imagenes/MenuInicio20.jpg)
+![Inicio Juego](imagenes/menu_inicio.jpeg)
 
 En los bulliciosos caminos de la ciudad, donde el sonido de los motores retumba, se desata una competencia legendaria. ¡Bienvenido a "Highway Rush", el juego de carreras que te llevará de vuelta a los días dorados de los arcades retro!
 
@@ -41,12 +41,16 @@ Este diagrama representa los casos de uso principales que abarcan las funcionali
 
 Al comprender las diversas interacciones entre los usuarios y el sistema, este diagrama sienta las bases para el diseño y la implementación efectiva del juego, garantizando una experiencia de juego emocionante y satisfactoria para todos los participantes.
 
+![Casos Uso](imagenes/image.png)
+
 ## Diagramas Clases:
 El diagrama de clases es una representación visual crucial en el diseño y desarrollo de sistemas orientados a objetos, como es el caso de los juegos de carreras. Este tipo de diagrama proporciona una vista estática de la estructura del sistema, identificando las clases, sus atributos y métodos, así como las relaciones entre ellas.
 
 En el contexto de un juego de carreras, el diagrama de clases permite visualizar la arquitectura subyacente del juego, desde la representación de los vehículos y sus características hasta la gestión de los distintos elementos del entorno de la carrera. Además, se identifican las relaciones de herencia, asociación y composición entre las clases, lo que ayuda a comprender cómo interactúan los diferentes componentes del sistema.
 
 Este diagrama proporciona una base sólida para el diseño e implementación del juego, permitiendo a los desarrolladores tener una comprensión clara de la estructura del sistema y facilitando la colaboración entre los equipos de desarrollo.
+
+![Clases](imagenes/image-3.png)
 
 ## Diagramas Secuencia:
 El diagrama de secuencia es una herramienta esencial en el análisis y diseño de sistemas interactivos, como los juegos de carreras, ya que permite visualizar las interacciones entre los distintos objetos y componentes del sistema a lo largo del tiempo. Este tipo de diagrama muestra la secuencia de mensajes intercambiados entre los objetos durante la ejecución de un escenario específico, lo que facilita la comprensión del flujo de eventos y la lógica subyacente del sistema.
@@ -55,7 +59,9 @@ En el contexto de un juego de carreras, el diagrama de secuencia captura las int
 
 Al proporcionar una representación visual de las secuencias de eventos en el juego, este diagrama es una herramienta invaluable para comprender y analizar el comportamiento dinámico del sistema, lo que ayuda a identificar posibles problemas de diseño y a optimizar la experiencia del jugador.
 
+![Secuencia](imagenes/image-2.png)
+
 # Integrantes:
-- Luis Santiaho Mesa Bautista - 20232020041
-- Juan Camilo Carvajal Camargo - 20232020026
 - María José Patiño Vera - 20232020053
+- Juan Camilo Carvajal Camargo - 20232020026
+- Luis Santiago Mesa Bautista - 20232020041

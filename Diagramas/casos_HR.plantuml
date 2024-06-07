@@ -1,0 +1,31 @@
+@startuml
+
+skinparam actorStyle awesome
+
+actor Jugador as player
+
+package Juego {
+    usecase "Iniciar juego" as UC1
+    usecase "Jugar" as UC2
+    usecase "Ingreso de Datos" as UC3
+    usecase "Correr" as UC4
+    usecase "Verificar vida" as UC5
+    usecase "Mostrar Perder" as UC6
+    usecase "Fin juego" as UC7
+    usecase "Continuar" as UC8
+}
+
+player --> UC1
+UC1 --> UC3 : "Jugador ingresa datos"
+UC1 --> UC2 : "Jugador inicia el juego"
+
+UC2 --> UC4 : "Correr"
+UC4 --> UC5 : "Verificar vida"
+
+UC5 --> UC6 : "Vida agotada"
+UC5 --> UC8 : "Vida disponible"
+
+UC6 --> UC7 : "Mostrar perder y finalizar juego"
+UC8 --> UC2 : "Continuar corriendo"
+
+@enduml
