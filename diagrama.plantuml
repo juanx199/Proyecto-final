@@ -1,0 +1,47 @@
+@startuml
+
+class carrito{
+    - car_x: int
+    - car_y: int
+    - car_width: int
+    - car_height: int
+    - speed: int
+    + mover()
+}
+
+class Obstaculo {
+    - obstacle_x: int 
+    - obstacle_y: int
+    - obstacle_width: int
+    - obstacle_height: int
+    - speed: int
+    - image_paths: list[str]
+    + update()
+}
+class Movimiento {
+    - screen_width: int
+    - screen_height: int
+    - speed: int
+    + mover_imagen()
+}
+
+class Principal {
+    - ruta_juego: str
+    - ruta_fondo: str
+    - ruta_logo: str
+    - ruta_fuente: str
+    + jugar()
+    + iniciar_juego()
+    + guardar_puntaje()
+    + salir()
+}
+
+class Tkinter {
+    + mainloop()
+}
+
+Carrito "1" -- "1..*" Obstaculo
+Principal ..> Tkinter
+
+@enduml
+
