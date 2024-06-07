@@ -63,5 +63,5 @@ Al proporcionar una representación visual de las secuencias de eventos en el ju
 
 # Integrantes:
 - María José Patiño Vera - 20232020053
-- Juan Camilo Carvajal Camargo - 20232020026
+- .l. 8======D
 - Luis Santiago Mesa Bautista - 20232020041
